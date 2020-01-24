@@ -26,12 +26,24 @@ const octokit = new github.GitHub(githubToken)
 
 async function run () {
   await nowDeploy()
+  
   if (context.issue.number) {
-    core.info('this is related issue or pull_request ')
-    await createCommentOnPullRequest()
+    core.info('this is related issue or pull_request')
+
+    try {
+        await createCommentOnPullRequest()
+    } catch(e) {
+        core.info('Cannot Create Pull Request Comment', e.toString())
+    }
+    
   } else if (context.eventName === 'push') {
     core.info('this is push event')
-    await createCommentOnCommit()
+
+    try {
+           await createCommentOnCommit()
+    } catch(e) {
+        core.info('Cannot Create Commit Comment', e.toString())
+    }
   }
 }
 
