@@ -28,7 +28,7 @@ async function run () {
   try {
     await nowDeploy()
   } catch(e) {
-        core.info('Cannot Deploy to Now', e.toString())
+        core.info('Cannot Deploy to Now\n' + e.toString())
   }
   
   if (context.issue.number) {
@@ -37,7 +37,7 @@ async function run () {
     try {
         await createCommentOnPullRequest()
     } catch(e) {
-        core.info('Cannot Create Pull Request Comment', e.toString())
+        core.info('Cannot Create Pull Request Comment\n' + e.toString())
     }
     
   } else if (context.eventName === 'push') {
@@ -46,7 +46,7 @@ async function run () {
     try {
            await createCommentOnCommit()
     } catch(e) {
-        core.info('Cannot Create Commit Comment', e.toString())
+        core.info('Cannot Create Commit Comment\n' + e.toString())
     }
   }
 }
