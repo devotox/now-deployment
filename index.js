@@ -25,7 +25,11 @@ const zeitAPIClient = axios.create({
 const octokit = new github.GitHub(githubToken)
 
 async function run () {
-  await nowDeploy()
+  try {
+    await nowDeploy()
+  } catch(e) {
+        core.info('Cannot Deploy to Now', e.toString())
+  }
   
   if (context.issue.number) {
     core.info('this is related issue or pull_request')
