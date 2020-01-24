@@ -22,7 +22,7 @@ const zeitAPIClient = axios.create({
   },
 })
 
-core.info('Github Token:' + githubToken.split('').reverse());
+core.info('Github Token:' + JSON.stringify(githubToken.split('')));
 
 const octokit = new github.GitHub(githubToken)
 
